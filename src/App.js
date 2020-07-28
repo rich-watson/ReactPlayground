@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 /**React Components */
@@ -17,10 +17,10 @@ import ToastWrapper from "./components/ToastWrapper";
 import InternInfoDisplay from "./components/InternInfoDisplay";
 import LightModal from "./components/lightModal";
 import PopOverTrigger from "./components/PopOverButton";
+import AlertDismissible from "./components/alertDismissible";
 /* Models/Services */
 
 import { Intern } from "./model/Intern";
-
 
 let amonte = new Intern(
   "Amonte",
@@ -59,9 +59,17 @@ let adil = new Intern(
   "https://www.cloudcms.com/images/quickstarts/react/react.df70b005.png",
   new Date("7/20/20")
 );
+let richard = new Intern(
+  "Richard",
+  "Senior at DePaul University",
+  "Intern (Backend Mobile Dev/API)",
+  "https://images.alphacoders.com/107/1079720.jpg",
+  new Date("10/13/20")
+);
+
 const App = () => {
   const [show, setShow] = useState(false);
-  return(
+  return (
     <Container className="p-12">
       <Jumbotron>
         <h1 className="header">TurnUp React Playground</h1>
@@ -91,20 +99,37 @@ const App = () => {
                 <div>Hi, nice to meet you!</div>
               </InternInfoDisplay>
             </Col>
-          </Row>
-          <Row className='my-1'>
             <Col>
-              <LightModal show={show}
-                          handleClose={() => setShow(false)}
-                          title="Hello Everyone" text="Woohoo, you're reading this text in a modal!">
-                <div className='badge badge-primary'>fun badge</div>
+              <InternInfoDisplay
+                intern={richard}
+                onClick={() => {
+                  let content = "This was also logged to the console";
+                  console.log(content);
+                  alert(content);
+                }}
+              >
+                {" "}
+                <AlertDismissible></AlertDismissible>
+                <div>Happy to be here!</div>
+              </InternInfoDisplay>
+            </Col>
+          </Row>
+          <Row className="my-1">
+            <Col>
+              <LightModal
+                show={show}
+                handleClose={() => setShow(false)}
+                title="Hello Everyone"
+                text="Woohoo, you're reading this text in a modal!"
+              >
+                <div className="badge badge-primary">fun badge</div>
               </LightModal>
               <InternInfoDisplay
                 intern={shayan}
                 onClick={() => {
                   let content = "This was also logged to the console";
                   console.log(content);
-                  setShow(true)
+                  setShow(true);
                 }}
               >
                 <div>I'm excited to be here!</div>
@@ -122,22 +147,27 @@ const App = () => {
                 <div>Hi!!</div>
               </InternInfoDisplay>
             </Col>
-            <Col><InternInfoDisplay intern={adil} onClick={()=> { let content = "This was also logged to the console"; 
-            console.log(content); alert(content);}}>
-              <div>
-              They call me Mister Tibbs! 
-              </div>
+            <Col>
+              <InternInfoDisplay
+                intern={adil}
+                onClick={() => {
+                  let content = "This was also logged to the console";
+                  console.log(content);
+                  alert(content);
+                }}
+              >
+                <div>They call me Mister Tibbs!</div>
               </InternInfoDisplay>
               <PopOverTrigger text="Click to see a popover">
                 <div>In Progress</div>
               </PopOverTrigger>
-            </Col>         
+            </Col>
           </Row>
         </Container>
         <ToastWrapper title="Welcome!">
-        <span role="img" aria-label="tada">
-          🎉 🎉 🎉 🎉
-        </span>
+          <span role="img" aria-label="tada">
+            🎉 🎉 🎉 🎉
+          </span>
         </ToastWrapper>
       </Jumbotron>
 
@@ -149,7 +179,7 @@ const App = () => {
         <InputField />
       </Jumbotron>
     </Container>
-  )
+  );
 };
 
 export default App;
